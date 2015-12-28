@@ -8,7 +8,7 @@ public class ServerLibrary extends JavaPlugin {
 	
 	@Override
 	public void onEnable() {
-		System.out.println(tag + "The Library now started.");
+		System.out.println(tag + "Welcome to the Minecraft Server Library.");
 	}
 	
 	@Override
