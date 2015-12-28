@@ -9,6 +9,15 @@ public class LoadingCache<K, V> extends Cache<K, V> {
 		add(key, value, 60);
 	}
 	
+	/**
+	 * Adds a new key into the Cache with
+	 * the given value and removes it after
+	 * a given time.
+	 * @param key gives the key that should be saved
+	 * @param value gives the value that should be saved
+	 * @param cacheingTime gives the time to remove the key
+	 */
+	
 	public void add(final K key, final V value, final int cacheingTime){
 		cache.put(key, value);
 		
