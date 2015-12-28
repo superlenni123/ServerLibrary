@@ -1,0 +1,4 @@
+name: ServerLibrary
+version: SNAPSHOT-0.1
+
+main: com.jens.ServerLibrary.ServerLibrary
