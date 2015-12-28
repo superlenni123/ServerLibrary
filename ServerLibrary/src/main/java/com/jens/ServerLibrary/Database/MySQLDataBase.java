@@ -1,8 +1,8 @@
-package com.jens.ServerLibrary.Database.Impl;
+package com.jens.ServerLibrary.Database;
 
 import java.sql.DriverManager;
 
-import com.jens.ServerLibrary.Database.Database;
+import com.jens.ServerLibrary.Database.Impl.Database;
 
 public class MySQLDataBase extends Database {
 

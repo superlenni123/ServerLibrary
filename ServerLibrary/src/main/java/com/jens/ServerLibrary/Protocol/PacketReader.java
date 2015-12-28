@@ -12,9 +12,28 @@ public abstract class PacketReader {
 	
 	protected String packet_Reader = "packet_Reader";
 	
+	/**
+	 * Gets the Packets of the injected Client.
+	 * @param packet Packet that was catched when arriving the Server
+	 * @param player Player/Client where the Packet should arrive the Server
+	 */
+	
 	public abstract void onPacketIn(Object packet, Player player);
 	
+	/**
+	 * Gets the Packets of the injected Client.
+	 * @param packet Packet that was catched before sending the specified Player
+	 * @param player Player/Client where the Packet should arrive
+	 */
+	
 	public abstract void onPacketOut(Object packet, Player player);
+	
+	/**
+	 * Injects the Player and adds
+	 * after the Decoder the Reader into the 
+	 * Network Pipiline.
+	 * @param player Player that should be injected
+	 */
 	
 	public void inject(Player player){
 		Channel channel = ((CraftPlayer)player).getHandle().playerConnection.networkManager.channel;
@@ -26,6 +45,13 @@ public abstract class PacketReader {
 			channel.pipeline().addAfter("decoder", packet_Reader, reader);
 		}
 	}
+	
+	/**
+	 * Uninjects the Player, removes the
+	 * Packet Reader out of his Network
+	 * Pipeline.
+	 * @param player Player that should be uninjected
+	 */
 	
 	public void uninject(Player player){
 		Channel channel = ((CraftPlayer)player).getHandle().playerConnection.networkManager.channel;
