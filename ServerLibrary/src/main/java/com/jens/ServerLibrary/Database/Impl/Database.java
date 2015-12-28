@@ -27,6 +27,7 @@ public abstract class Database {
 		
 		source = new DataSource(host, port, database, username, password);
 	}
+	
 	/**
 	 * Gives the connected Database.
 	 * @return an instance of the connected Database
