@@ -1,6 +1,8 @@
 package com.jens.ServerLibrary.Database.Impl;
 
 import java.sql.Connection;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import com.jens.ServerLibrary.Utils.DataSource;
 
@@ -8,6 +10,7 @@ public abstract class Database {
 	
 	protected DataSource source;
 	protected Connection con;
+	protected ExecutorService exe;
 	
 	/**
 	 * Initializes a new Database by using
@@ -26,6 +29,7 @@ public abstract class Database {
 			String password) {
 		
 		source = new DataSource(host, port, database, username, password);
+		exe = Executors.newCachedThreadPool();
 	}
 	
 	/**
@@ -50,5 +54,14 @@ public abstract class Database {
 	 */
 	
 	public abstract boolean isConnected() throws Exception;
+	
+	/**
+	 * Gets the java.sql Connection of the
+	 * created Database.
+	 * @return java.sql.Connection
+	 * @throws Exception if operation fails
+	 */
+	
+	public abstract Connection getConnection() throws Exception;
 
 }

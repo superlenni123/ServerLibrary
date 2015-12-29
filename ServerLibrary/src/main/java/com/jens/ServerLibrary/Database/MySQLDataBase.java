@@ -1,6 +1,12 @@
 package com.jens.ServerLibrary.Database;
 
+import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Future;
 
 import com.jens.ServerLibrary.Database.Impl.Database;
 
@@ -35,5 +41,86 @@ public class MySQLDataBase extends Database {
 	@Override
 	public boolean isConnected() {
 		return (con == null ? false : true);
+	}
+	
+	@Override
+	public Connection getConnection() throws Exception {
+		return con;
+	}
+	
+	public PreparedStatement prepareStatement(String query) throws SQLException {
+		if(isConnected()){
+			return con.prepareStatement(query);
+		} else {
+			throw new SQLException("SQLDatabase found no Connection");
+		}
+	}
+	
+	public int executeUpdate(PreparedStatement ps) throws Exception {
+		if(isConnected()){
+			
+			Future<Integer> future = exe.submit(new Callable<Integer>() {
+
+				@Override
+				public Integer call() throws Exception {
+					return ps.executeUpdate();
+				}
+			});
+			
+			return future.get();
+		} else {
+			throw new SQLException("SQLDatabase found no Connection");
+		}
+	}
+	
+	public int executeUpdate(String query) throws Exception {
+		if(isConnected()){
+			
+			Future<Integer> future = exe.submit(new Callable<Integer>() {
+
+				@Override
+				public Integer call() throws Exception {
+					return con.prepareStatement(query).executeUpdate();
+				}
+			});
+			
+			return future.get();
+		} else {
+			throw new SQLException("SQLDatabase found no Connection");
+		}
+	}
+	
+	public ResultSet executeQuery(PreparedStatement ps) throws Exception {
+		if(isConnected()){
+			
+			Future<ResultSet> future = exe.submit(new Callable<ResultSet>() {
+
+				@Override
+				public ResultSet call() throws Exception {
+					return ps.executeQuery();
+				}
+			});
+			
+			return future.get();
+		} else {
+			throw new SQLException("SQLDatabase found no Connection");
+		}
+	}
+	
+	public ResultSet executeQuery(String query) throws Exception {
+		if(isConnected()){
+			
+			Future<ResultSet> future = exe.submit(new Callable<ResultSet>() {
+
+				@Override
+				public ResultSet call() throws Exception {
+					return con.prepareStatement(query).executeQuery();
+				}
+			});
+			
+			return future.get();
+		} else {
+			throw new SQLException("SQLDatabase found no Connection");
+		}
 	}
 }
