@@ -9,9 +9,9 @@ import java.util.concurrent.Future;
 
 import com.jens.ServerLibrary.Database.Impl.Database;
 
-public class MySQLDataBase extends Database {
+public class MySQLDatabase extends Database {
 
-	public MySQLDataBase(String host, int port, String database, String username, String password) {
+	public MySQLDatabase(String host, int port, String database, String username, String password) {
 		super(host, port, database, username, password);
 	}
 
