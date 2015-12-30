@@ -1,6 +1,5 @@
 package com.jens.ServerLibrary.Database;
 
-import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -36,16 +35,6 @@ public class MySQLDataBase extends Database {
 			
 			con = null;
 		}
-	}
-
-	@Override
-	public boolean isConnected() {
-		return (con == null ? false : true);
-	}
-	
-	@Override
-	public Connection getConnection() throws Exception {
-		return con;
 	}
 	
 	public PreparedStatement prepareStatement(String query) throws SQLException {

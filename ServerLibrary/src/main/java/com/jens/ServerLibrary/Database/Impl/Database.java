@@ -53,7 +53,9 @@ public abstract class Database {
 	 * @throws Exception if operation fails
 	 */
 	
-	public abstract boolean isConnected() throws Exception;
+	public boolean isConnected() {
+		return (con == null ? false : true);
+	}
 	
 	/**
 	 * Gets the java.sql Connection of the
@@ -62,6 +64,8 @@ public abstract class Database {
 	 * @throws Exception if operation fails
 	 */
 	
-	public abstract Connection getConnection() throws Exception;
+	public Connection getConnection() {
+		return con;
+	}
 
 }
